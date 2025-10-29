@@ -1,6 +1,7 @@
 
 import { isValidNumber, isStringOfLength } from "@dwtechs/checkard";
 import { log } from "@dwtechs/winstan";
+import type { Request, Response, NextFunction } from 'express';
 
 
 /**
@@ -14,15 +15,19 @@ import { log } from "@dwtechs/winstan";
  * 
  */
 function getConsumer(req: Request, res: Response, next: NextFunction) {
-  const id = +req.headers["x-consumer-id"];
+  const id = req.headers["x-consumer-id"];
   const name = req.headers["x-consumer-name"];
   log.debug(`getConsumer(id=${id}, name=${name})`);
-  if (!isValidNumber(id, 1, 999999999, true))
+  if (!isValidNumber(id, 1, 999999999, false))
     return next({ status: 400, msg: "Missing consumer Id" });
   if (!isStringOfLength(name, 5))
     return next({ status: 400, msg: "Missing consumer name" });
-  req.consumerId = id;
-  req.consumerName = name;
+  
+  // Store consumer info in res.locals for request-scoped access
+  res.locals.consumerId = +id;
+  res.locals.consumerName = name;
+  
+  log.debug(`Consumer stored: id=${res.locals.consumerId}, name=${res.locals.consumerName}`);
   next();
 }
 

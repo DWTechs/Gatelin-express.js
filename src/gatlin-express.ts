@@ -1,7 +1,5 @@
 
 export {
-  refresh,
-  decodeAccess,
-  decodeRefresh,
+  getConsumer,
 } from './consumer';
   
