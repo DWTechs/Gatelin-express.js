@@ -45,7 +45,17 @@ $ npm i @dwtechs/gatlin-express
 ```javascript
 
 // @ts-check
+import express from "express";
+const router = express.Router();
 
+import getConsumer from "@dwtechs/gatlin-express";
+
+// Routes
+// Get users and returns Json
+router.get("/search", getConsumer, ...);
+
+// Add new users
+router.post("/", getConsumer, ...);
 
 ```
 
@@ -56,28 +66,21 @@ $ npm i @dwtechs/gatlin-express
 ```typescript
 
 /**
- * Refreshes the JWT tokens for a user.
- *
- * This function generates new access and refresh tokens for a consumer based on the provided
- * decoded access token or user ID in the request body. It validates the issuer (iss) and
- * creates new tokens if the validation is successful. The new tokens are then added to the
- * response local and the request body objects.
+ * Middleware to extract and validate consumer information from request headers.
+ * Retrieves consumer ID from 'x-consumer-id' header and consumer name from 'x-consumer-name' header.
+ * Validates that the ID is a valid number between 1 and 999999999, and the name has at least 5 characters.
+ * Stores the validated consumer information in res.locals.consumerId and res.locals.consumerName 
+ * for use by subsequent middleware in the request pipeline.
  *
  * @param {Request} req - The request object containing the decoded access token or user ID. Where the new tokens will be added
  * @param {Response} res - The response object where the new tokens will be added.
  * @param {NextFunction} next - The next middleware function in the Express.js request-response cycle.
  *
- * @returns {Promise<void>} Calls the next middleware function with an error if the issuer is invalid,
+ * @returns {void} Calls the next middleware function with an error if the issuer is invalid,
  *          otherwise proceeds to the next middleware function.
  * 
- * @throws {InvalidIssuerError} If the issuer (iss) is not a string or number (HTTP 400)
- * @throws {InvalidSecretsError} If the secrets array is empty or invalid (HTTP 500)
- * @throws {InvalidDurationError} If the duration is not a positive number (HTTP 400)
- * @throws {InvalidBase64Secret} If the secret cannot be decoded from base64 (HTTP 500)
- * @throws {Object} Will call next() with error object containing:
- *   - statusCode: 400 - When iss (issuer) is missing or invalid
  */
-function refresh(req: Request, res: Response, next: NextFunction): void {}
+function getConsumer(req: Request, res: Response, next: NextFunction): void {}
 
 
 ```

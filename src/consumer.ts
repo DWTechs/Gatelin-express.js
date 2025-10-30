@@ -5,16 +5,21 @@ import type { Request, Response, NextFunction } from 'express';
 
 
 /**
+ * Middleware to extract and validate consumer information from request headers.
+ * Retrieves consumer ID from 'x-consumer-id' header and consumer name from 'x-consumer-name' header.
+ * Validates that the ID is a valid number between 1 and 999999999, and the name has at least 5 characters.
+ * Stores the validated consumer information in res.locals.consumerId and res.locals.consumerName 
+ * for use by subsequent middleware in the request pipeline.
  *
  * @param {Request} req - The request object containing the decoded access token or user ID. Where the new tokens will be added
  * @param {Response} res - The response object where the new tokens will be added.
  * @param {NextFunction} next - The next middleware function in the Express.js request-response cycle.
  *
- * @returns {Promise<void>} Calls the next middleware function with an error if the issuer is invalid,
+ * @returns {void} Calls the next middleware function with an error if the issuer is invalid,
  *          otherwise proceeds to the next middleware function.
  * 
  */
-function getConsumer(req: Request, res: Response, next: NextFunction) {
+function getConsumer(req: Request, res: Response, next: NextFunction): void {
   const id = req.headers["x-consumer-id"];
   const name = req.headers["x-consumer-name"];
   log.debug(`getConsumer(id=${id}, name=${name})`);
