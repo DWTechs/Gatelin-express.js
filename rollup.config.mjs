@@ -1,8 +1,8 @@
 const config =  {
-  input: "build/es6/gatlin-express.js",
+  input: "build/es6/gatelin-express.js",
   output: {
     name: "winstan",
-    file: "build/gatlin-express.mjs",
+    file: "build/gatelin-express.mjs",
     format: "es"
   },
   external: [

@@ -1,7 +1,7 @@
 
-[![License: MIT](https://img.shields.io/npm/l/@dwtechs/gatlin-express.svg?color=brightgreen)](https://opensource.org/licenses/MIT)
-[![npm version](https://badge.fury.io/js/%40dwtechs%2Fgatlin-express.svg)](https://www.npmjs.com/package/@dwtechs/gatlin-express)
-[![last version release date](https://img.shields.io/github/release-date/DWTechs/Gatlin-express.js)](https://www.npmjs.com/package/@dwtechs/gatlin-express)
+[![License: MIT](https://img.shields.io/npm/l/@dwtechs/gatelin-express.svg?color=brightgreen)](https://opensource.org/licenses/MIT)
+[![npm version](https://badge.fury.io/js/%40dwtechs%2Fgatelin-express.svg)](https://www.npmjs.com/package/@dwtechs/gatelin-express)
+[![last version release date](https://img.shields.io/github/release-date/DWTechs/Gatelin-express.js)](https://www.npmjs.com/package/@dwtechs/gatelin-express)
 
 
 - [Synopsis](#synopsis)
@@ -17,7 +17,7 @@
 
 ## Synopsis
 
-**[Gatlin-express.js](https://github.com/DWTechs/Gatlin-express.js)** is an open source Gatelin gateway toolset for Express.js.  
+**[Gatelin-express.js](https://github.com/DWTechs/Gatelin-express.js)** is an open source Gatelin gateway toolset for Express.js.  
 
 - 🪶 Very lightweight
 - 🧪 Thoroughly tested
@@ -35,7 +35,7 @@ This is the oldest targeted versions.
 ## Installation
 
 ```bash
-$ npm i @dwtechs/gatlin-express
+$ npm i @dwtechs/gatelin-express
 ```
 
 
@@ -48,7 +48,7 @@ $ npm i @dwtechs/gatlin-express
 import express from "express";
 const router = express.Router();
 
-import getConsumer from "@dwtechs/gatlin-express";
+import getConsumer from "@dwtechs/gatelin-express";
 
 // Routes
 // Get users and returns Json
@@ -88,13 +88,13 @@ function getConsumer(req: Request, res: Response, next: NextFunction): void {}
 
 ## Logs
 
-**Gatlin-express.js** uses **[@dwtechs/Winstan](https://www.npmjs.com/package/@dwtechs/winstan)** library for logging.
+**Gatelin-express.js** uses **[@dwtechs/Winstan](https://www.npmjs.com/package/@dwtechs/winstan)** library for logging.
 All logs are in debug mode. Meaning they should not appear in production mode.
 
 ## Contributors
 
-**Gatlin-express.js** is still in development and we would be glad to get all the help you can provide.
-To contribute please read **[contributor.md](https://github.com/DWTechs/Gatlin-express.js/blob/main/contributor.md)** for detailed installation guide.
+**Gatelin-express.js** is still in development and we would be glad to get all the help you can provide.
+To contribute please read **[contributor.md](https://github.com/DWTechs/Gatelin-express.js/blob/main/contributor.md)** for detailed installation guide.
 
 
 ## Stack

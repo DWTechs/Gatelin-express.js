@@ -3,20 +3,20 @@
 ## Clone the project :
 
   ```bash
-  $ git clone https://github.com/DWTechs/Gatlin-express.js.git
+  $ git clone https://github.com/DWTechs/Gatelin-express.js.git
   ```
 
 ## Launch with docker
  
   ### build image : 
   ```bash
-  $ cd Gatlin-express.js/
+  $ cd Gatelin-express.js/
   $ docker-compose up -d
   ```
   
   ### build lib : 
   ```bash
-  $ cd Gatlin-express.js/
+  $ cd Gatelin-express.js/
   $ docker-compose run winstan
   ```
   
@@ -25,7 +25,7 @@ OR
 ## Install project dependencies :
 
   ```bash
-  $ cd Gatlin-express.js/
+  $ cd Gatelin-express.js/
   $ npm i
   ```
 

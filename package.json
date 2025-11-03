@@ -1,19 +1,19 @@
 {
-  "name": "@dwtechs/gatlin-express",
+  "name": "@dwtechs/gatelin-express",
   "version": "0.1.2",
   "description": "Open source Gatelin gateway toolset for Express.js.",
   "keywords": [
     "Gateway"
   ],
-  "homepage": "https://github.com/DWTechs/Gatlin-express.js",
-  "main": "dist/gatlin-express",
-  "types": "dist/gatlin-express",
+  "homepage": "https://github.com/DWTechs/Gatelin-express.js",
+  "main": "dist/gatelin-express",
+  "types": "dist/gatelin-express",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DWTechs/Gatlin-express.js"
+    "url": "https://github.com/DWTechs/Gatelin-express.js"
   },
   "bugs": {
-    "url": "https://github.com/DWTechs/Gatlin-express.js/issues",
+    "url": "https://github.com/DWTechs/Gatelin-express.js/issues",
     "email": ""
   },
   "license": "MIT",

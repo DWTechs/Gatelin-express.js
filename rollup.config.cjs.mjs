@@ -1,10 +1,10 @@
 import resolve from "@rollup/plugin-node-resolve";
 
 const config =  {
-  input: "build/es6/gatlin-express.js",
+  input: "build/es6/gatelin-express.js",
   output: {
     name: "winstan",
-    file: "build/gatlin-express.cjs.js",
+    file: "build/gatelin-express.cjs.js",
     format: "cjs"
   },
   external: [

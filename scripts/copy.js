@@ -1,19 +1,19 @@
 
 const fs      = require('fs');
 
-const mail    = 'https://github.com/DWTechs/Gatlin-express.js';
+const mail    = 'https://github.com/DWTechs/Gatelin-express.js';
 const CRLF    = '\r\n';
 const rel     = './';
 const src     = `${rel}build/`;
 const dest    = `${rel}dist/`; 
 const files   = [
   {
-    src:  `${rel}src/gatlin-express.d.ts`,
-    dest: `${dest}gatlin-express.d.ts`
+    src:  `${rel}src/gatelin-express.d.ts`,
+    dest: `${dest}gatelin-express.d.ts`
   },
   {
-    src:  `${src}gatlin-express.mjs`,
-    dest: `${dest}gatlin-express.js`
+    src:  `${src}gatelin-express.mjs`,
+    dest: `${dest}gatelin-express.js`
   },
 ];
 

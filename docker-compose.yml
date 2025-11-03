@@ -1,16 +1,16 @@
 version: "3.8"
 services:
 
-  gatlin-express:
+  gatelin-express:
     build: ./
-    container_name: gatlin-express
+    container_name: gatelin-express
     volumes:
       - ./:/usr/src/app
-      - gatlin-express_node_modules:/usr/src/app/node_modules
+      - gatelin-express_node_modules:/usr/src/app/node_modules
 
 
 volumes:
-  gatlin-express_node_modules:
+  gatelin-express_node_modules:
     driver: local
     driver_opts:
       type: none

@@ -21,30 +21,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-https://github.com/DWTechs/Gatlin-express.js
+https://github.com/DWTechs/Gatelin-express.js
 */
 
-import type { Request, Response, NextFunction } from 'express';
+import { isValidNumber, isStringOfLength } from '@dwtechs/checkard';
+import { log } from '@dwtechs/winstan';
 
-// Extend Express Request interface globally
-declare global {
-  namespace Express {
-    interface Request {
-      isProtected?: boolean;
-      decodedAccessToken?: any;
-      decodedRefreshToken?: any;
-    }
-  }
+function getConsumer(req, res, next) {
+    const id = req.headers["x-consumer-id"];
+    const name = req.headers["x-consumer-name"];
+    log.debug(`getConsumer(id=${id}, name=${name})`);
+    if (!isValidNumber(id, 1, 999999999, false))
+        return next({ status: 400, msg: "Missing consumer Id" });
+    if (!isStringOfLength(name, 5))
+        return next({ status: 400, msg: "Missing consumer name" });
+    res.locals.consumerId = +id;
+    res.locals.consumerName = name;
+    log.debug(`Consumer stored: id=${res.locals.consumerId}, name=${res.locals.consumerName}`);
+    next();
 }
 
-declare function refresh(req: Request, res: Response, next: NextFunction): Promise<void>;
-declare function decodeAccess(req: Request, _res: Response, next: NextFunction): void;
-declare function decodeRefresh(req: Request, _res: Response, next: NextFunction): Promise<void>;
-
-export { 
-  refresh,
-  decodeAccess,
-  decodeRefresh,
-};
-
-
+export { getConsumer };
