@@ -8,7 +8,6 @@
 - [Support](#support)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Environment variables](#environment-variables)
 - [API Reference](#api-reference)
 - [Logs](#logs)
 - [Contributors](#contributors)
@@ -21,15 +20,15 @@
 
 - 🪶 Very lightweight
 - 🧪 Thoroughly tested
-- 🚚 Shipped as EcmaScrypt Express module
-- 📝 Written in Typescript
+- 🚚 Shipped as ECMAScript Express module
+- 📝 Written in TypeScript
 
 
 ## Support
 
 - node: 22
 
-This is the oldest targeted versions.  
+This is the oldest targeted version.  
 
 
 ## Installation
@@ -59,6 +58,10 @@ router.post("/", getConsumer, ...);
 
 ```
 
+The `getConsumer` middleware extracts and validates consumer information from request headers.
+It stores the validated consumer information in **res.locals.consumerId** and **res.locals.consumerName** for use by subsequent middleware in the request pipeline.
+It must be called whenever the route is protected and requires consumer information.
+
 
 ## API Reference
 
@@ -72,11 +75,11 @@ router.post("/", getConsumer, ...);
  * Stores the validated consumer information in res.locals.consumerId and res.locals.consumerName 
  * for use by subsequent middleware in the request pipeline.
  *
- * @param {Request} req - The request object containing the decoded access token or user ID. Where the new tokens will be added
- * @param {Response} res - The response object where the new tokens will be added.
+ * @param {Request} req - The Express request object containing consumer headers (x-consumer-id and x-consumer-name).
+ * @param {Response} res - The Express response object where consumer data will be stored in res.locals.
  * @param {NextFunction} next - The next middleware function in the Express.js request-response cycle.
  *
- * @returns {void} Calls the next middleware function with an error if the issuer is invalid,
+ * @returns {void} Calls the next middleware function with an error if consumer validation fails,
  *          otherwise proceeds to the next middleware function.
  * 
  */
