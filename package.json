@@ -1,6 +1,6 @@
 {
   "name": "@dwtechs/gatelin-express",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "Open source Gatelin gateway toolset for Express.js.",
   "keywords": [
     "Gateway"
@@ -36,8 +36,8 @@
     "dist/"
   ],
   "dependencies": {
-    "@dwtechs/checkard": "3.5.1",
-    "@dwtechs/winstan": "0.4.0"
+    "@dwtechs/checkard": "3.6.0",
+    "@dwtechs/winstan": "0.5.0"
   },
   "devDependencies": {
     "@babel/preset-env": "7.26.0",
