@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/npm/l/@dwtechs/gatelin-express.svg?color=brightgreen)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/%40dwtechs%2Fgatelin-express.svg)](https://www.npmjs.com/package/@dwtechs/gatelin-express)
 [![last version release date](https://img.shields.io/github/release-date/DWTechs/Gatelin-express.js)](https://www.npmjs.com/package/@dwtechs/gatelin-express)
+![Jest:coverage](https://img.shields.io/badge/Jest:coverage-100%25-brightgreen.svg)
 
 
 - [Synopsis](#synopsis)
