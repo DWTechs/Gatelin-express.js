@@ -6,13 +6,13 @@ import type { Request, Response, NextFunction } from 'express';
 
 /**
  * Middleware to extract and validate consumer information from request headers.
- * Retrieves consumer ID from 'x-consumer-id' header and consumer name from 'x-consumer-name' header.
- * Validates that the ID is a valid number between 1 and 999999999, and the name has at least 5 characters.
- * Stores the validated consumer information in res.locals.consumerId and res.locals.consumerName 
+ * Retrieves consumer ID from 'x-consumer-id' header and consumer nickname from 'x-consumer-nickname' header.
+ * Validates that the ID is a valid number between 1 and 999999999, and the nickname has at least 5 characters.
+ * Stores the validated consumer information in res.locals.consumer ({ id, nickname })
  * for use by subsequent middleware in the request pipeline.
  *
- * @param {Request} req - The Express request object containing consumer headers (x-consumer-id and x-consumer-name).
- * @param {Response} res - The Express response object where consumer data will be stored in res.locals.
+ * @param {Request} req - The Express request object containing consumer headers (x-consumer-id and x-consumer-nickname).
+ * @param {Response} res - The Express response object where consumer data will be stored in res.locals.consumer.
  * @param {NextFunction} next - The next middleware function in the Express.js request-response cycle.
  *
  * @returns {void} Calls the next middleware function with an error if consumer validation fails,
@@ -21,18 +21,17 @@ import type { Request, Response, NextFunction } from 'express';
  */
 function getConsumer(req: Request, res: Response, next: NextFunction): void {
   const id = req.headers["x-consumer-id"];
-  const name = req.headers["x-consumer-name"];
-  log.debug(`getConsumer(id=${id}, name=${name})`);
+  const nickname = req.headers["x-consumer-nickname"];
+  log.debug(`getConsumer(id=${id}, nickname=${nickname})`);
   if (!isValidNumber(id, 1, 999999999, false))
     return next({ status: 400, msg: "Missing consumer Id" });
-  if (!isStringOfLength(name, 5))
-    return next({ status: 400, msg: "Missing consumer name" });
+  if (!isStringOfLength(nickname, 5))
+    return next({ status: 400, msg: "Missing consumer nickname" });
   
   // Store consumer info in res.locals for request-scoped access
-  res.locals.consumerId = +id;
-  res.locals.consumerName = name;
+  res.locals.consumer = { id: +id, nickname };
   
-  log.debug(`Consumer stored: id=${res.locals.consumerId}, name=${res.locals.consumerName}`);
+  log.debug(`Consumer stored: id=${res.locals.consumer.id}, nickname=${res.locals.consumer.nickname}`);
   next();
 }
 
