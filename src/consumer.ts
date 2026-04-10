@@ -22,7 +22,7 @@ import type { Request, Response, NextFunction } from 'express';
 function getConsumer(req: Request, res: Response, next: NextFunction): void {
   const id = req.headers["x-consumer-id"];
   const nickname = req.headers["x-consumer-nickname"];
-  log.debug(`getConsumer(id=${id}, nickname=${nickname})`);
+  log.debug(() => `getConsumer id=${id} nickname=${nickname}`);
   if (!isValidNumber(id, 1, 999999999, false))
     return next({ status: 400, msg: "Missing consumer Id" });
   if (!isStringOfLength(nickname, 5))
@@ -31,7 +31,6 @@ function getConsumer(req: Request, res: Response, next: NextFunction): void {
   // Store consumer info in res.locals for request-scoped access
   res.locals.consumer = { id: +id, nickname };
   
-  log.debug(`Consumer stored: id=${res.locals.consumer.id}, nickname=${res.locals.consumer.nickname}`);
   next();
 }
 
