@@ -5,8 +5,6 @@
 ![Jest:coverage](https://img.shields.io/badge/Jest:coverage-100%25-brightgreen.svg)
 
 
-## Synopsis
-
 **[Gatelin-express.js](https://github.com/DWTechs/Gatelin-express.js)** is an open source Gatelin gateway toolset for Express.js.  
 
 - 🪶 Very lightweight
@@ -14,23 +12,13 @@
 - 🚚 Shipped as ECMAScript Express module
 - 📝 Written in TypeScript
 
-
-## Support
-
-- node: 22
-
-This is the oldest targeted version.  
-
-
 ## Installation
 
 ```bash
 $ npm i @dwtechs/gatelin-express
 ```
 
-
 ## Usage
-
 
 ```javascript
 
@@ -53,9 +41,7 @@ The `getConsumer` middleware extracts and validates consumer information from re
 It stores the validated consumer information in **res.locals.consumer** (`{ id, nickname }`) for use by subsequent middleware in the request pipeline.
 It must be called whenever the route is protected and requires consumer information.
 
-
 ## API Reference
-
 
 ```typescript
 
@@ -81,7 +67,6 @@ It must be called whenever the route is protected and requires consumer informat
  */
 function getConsumer(req: Request, res: Response, next: NextFunction): void {}
 
-
 ```
 
 The `Consumer` interface is exported and can be used to type `res.locals.consumer` in downstream middleware or route handlers:
@@ -97,12 +82,16 @@ const consumer = res.locals.consumer as Consumer;
 
 ```
 
+## Support
+
+| Environment | Version |
+| :---------- | :-----: |
+| Node.js     |  >= 22  |
 
 ## Logs
 
 **Gatelin-express.js** uses **[@dwtechs/Winstan](https://www.npmjs.com/package/@dwtechs/winstan)** library for logging.
 All logs are in debug mode. Meaning they should not appear in production mode.
-
 
 ## Stack
 
