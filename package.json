@@ -6,7 +6,8 @@
     "Gateway"
   ],
   "homepage": "https://github.com/DWTechs/Gatelin-express.js",
-  "main": "dist/gatelin-express",
+  "type": "module",
+  "exports": "./dist/gatelin-express.js",
   "types": "dist/gatelin-express",
   "repository": {
     "type": "git",

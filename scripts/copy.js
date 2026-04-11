@@ -1,5 +1,5 @@
 
-const fs      = require('fs');
+import fs from 'node:fs';
 
 const mail    = 'https://github.com/DWTechs/Gatelin-express.js';
 const CRLF    = '\r\n';
