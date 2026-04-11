@@ -29,15 +29,13 @@ import { log } from '@dwtechs/winstan';
 
 function getConsumer(req, res, next) {
     const id = req.headers["x-consumer-id"];
-    const name = req.headers["x-consumer-name"];
-    log.debug(`getConsumer(id=${id}, name=${name})`);
+    const nickname = req.headers["x-consumer-nickname"];
+    log.debug(() => `getConsumer id=${id} nickname=${nickname}`);
     if (!isValidNumber(id, 1, 999999999, false))
         return next({ status: 400, msg: "Missing consumer Id" });
-    if (!isStringOfLength(name, 5))
-        return next({ status: 400, msg: "Missing consumer name" });
-    res.locals.consumerId = +id;
-    res.locals.consumerName = name;
-    log.debug(`Consumer stored: id=${res.locals.consumerId}, name=${res.locals.consumerName}`);
+    if (!isStringOfLength(nickname, 5))
+        return next({ status: 400, msg: "Missing consumer nickname" });
+    res.locals.consumer = { id: +id, nickname };
     next();
 }
 

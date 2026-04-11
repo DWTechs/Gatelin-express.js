@@ -89,6 +89,19 @@ function getConsumer(req: Request, res: Response, next: NextFunction): void {}
 
 ```
 
+The `Consumer` interface is exported and can be used to type `res.locals.consumer` in downstream middleware or route handlers:
+
+```typescript
+
+import type { Consumer } from "@dwtechs/gatelin-express";
+
+// Type res.locals.consumer in downstream middleware
+const consumer = res.locals.consumer as Consumer;
+// consumer.id       → number
+// consumer.nickname → string
+
+```
+
 
 ## Logs
 
