@@ -23,10 +23,14 @@ function getConsumer(req: Request, res: Response, next: NextFunction): void {
   const numId = Number(req.headers["x-consumer-id"]);
   const nickname = req.headers["x-consumer-nickname"];
   log.debug(() => `getConsumer id=${numId} nickname=${nickname}`);
-  if (!isValidInteger(numId, 1, 999999999, false))
-    return next({ status: 400, msg: "Missing consumer Id" });
-  if (!isStringOfLength(nickname, 5))
-    return next({ status: 400, msg: "Missing consumer nickname" });
+  if (!isValidInteger(numId, 1, 999999999, false)) {
+    next({ status: 400, msg: "Missing consumer Id" });
+    return;
+  }
+  if (!isStringOfLength(nickname, 5)) {
+    next({ status: 400, msg: "Missing consumer nickname" });
+    return;
+  }
   
   // Store consumer info in res.locals for request-scoped access
   res.locals.consumer = { id: numId, nickname };
