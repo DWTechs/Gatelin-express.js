@@ -1,5 +1,5 @@
 
-import { isValidNumber, isStringOfLength } from "@dwtechs/checkard";
+import { isValidInteger, isStringOfLength } from "@dwtechs/checkard";
 import { log } from "@dwtechs/winstan";
 import type { Request, Response, NextFunction } from 'express';
 
@@ -7,7 +7,7 @@ import type { Request, Response, NextFunction } from 'express';
 /**
  * Middleware to extract and validate consumer information from request headers.
  * Retrieves consumer ID from 'x-consumer-id' header and consumer nickname from 'x-consumer-nickname' header.
- * Validates that the ID is a valid number between 1 and 999999999, and the nickname has at least 5 characters.
+ * Validates that the ID is a valid integer between 1 and 999999999, and the nickname has at least 5 characters.
  * Stores the validated consumer information in res.locals.consumer ({ id, nickname })
  * for use by subsequent middleware in the request pipeline.
  *
@@ -23,7 +23,7 @@ function getConsumer(req: Request, res: Response, next: NextFunction): void {
   const id = req.headers["x-consumer-id"];
   const nickname = req.headers["x-consumer-nickname"];
   log.debug(() => `getConsumer id=${id} nickname=${nickname}`);
-  if (!isValidNumber(id, 1, 999999999, false))
+  if (!isValidInteger(id, 1, 999999999, false))
     return next({ status: 400, msg: "Missing consumer Id" });
   if (!isStringOfLength(nickname, 5))
     return next({ status: 400, msg: "Missing consumer nickname" });

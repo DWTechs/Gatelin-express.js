@@ -139,6 +139,16 @@ describe("getConsumer", () => {
       expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
     });
 
+    it("should call next() with a 400 error when x-consumer-id is a float", () => {
+      const req = mockReq({ "x-consumer-id": "1.5", "x-consumer-nickname": "johndoe" });
+      const res = mockRes();
+      const next = mockNext();
+
+      getConsumer(req, res, next);
+
+      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+    });
+
     it("should call next() with a 400 error when x-consumer-id is an empty string", () => {
       const req = mockReq({ "x-consumer-id": "", "x-consumer-nickname": "johndoe" });
       const res = mockRes();

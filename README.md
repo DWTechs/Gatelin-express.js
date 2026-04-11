@@ -51,10 +51,10 @@ const router = express.Router();
 import getConsumer from "@dwtechs/gatelin-express";
 
 // Routes
-// Get users and returns Json
+// Get items and returns Json
 router.get("/search", getConsumer, ...);
 
-// Add new users
+// Add new items
 router.post("/", getConsumer, ...);
 
 ```
@@ -72,7 +72,7 @@ It must be called whenever the route is protected and requires consumer informat
 /**
  * Middleware to extract and validate consumer information from request headers.
  * Retrieves consumer ID from 'x-consumer-id' header and consumer nickname from 'x-consumer-nickname' header.
- * Validates that the ID is a valid number between 1 and 999999999, and the nickname has at least 5 characters.
+ * Validates that the ID is a valid integer between 1 and 999999999, and the nickname has at least 5 characters.
  * Stores the validated consumer information in res.locals.consumer ({ id, nickname })
  * for use by subsequent middleware in the request pipeline.
  *
@@ -107,11 +107,6 @@ const consumer = res.locals.consumer as Consumer;
 
 **Gatelin-express.js** uses **[@dwtechs/Winstan](https://www.npmjs.com/package/@dwtechs/winstan)** library for logging.
 All logs are in debug mode. Meaning they should not appear in production mode.
-
-## Contributors
-
-**Gatelin-express.js** is still in development and we would be glad to get all the help you can provide.
-To contribute please read **[contributor.md](https://github.com/DWTechs/Gatelin-express.js/blob/main/contributor.md)** for detailed installation guide.
 
 
 ## Stack
