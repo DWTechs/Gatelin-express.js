@@ -8,9 +8,10 @@
 Open source Express.js middleware to extract and validate Gatelin gateway consumer headers.  
 
 - 🪶 Very lightweight
-- 🧪 Thoroughly tested
-- 🚚 Shipped as ECMAScript Express module
+- 🧪 100% code coverage
+- 🚚 Shipped as ESM
 - 📝 Written in TypeScript
+- 🔒 Strict input validation
 
 ## Installation
 
