@@ -5,7 +5,7 @@
 ![Jest:coverage](https://img.shields.io/badge/Jest:coverage-100%25-brightgreen.svg)
 
 
-**[Gatelin-express.js](https://github.com/DWTechs/Gatelin-express.js)** is an open source Gatelin gateway toolset for Express.js.  
+**[Gatelin-express.js](https://github.com/DWTechs/Gatelin-express.js)** is an open source Express.js middleware to extract and validate Gatelin gateway consumer headers.  
 
 - 🪶 Very lightweight
 - 🧪 Thoroughly tested
@@ -29,17 +29,14 @@ const router = express.Router();
 import { getConsumer } from "@dwtechs/gatelin-express";
 
 // Routes
-// Get items and returns Json
-router.get("/search", getConsumer, ...);
-
 // Add new items
 router.post("/", getConsumer, ...);
 
 ```
 
-The `getConsumer` middleware extracts and validates consumer information from request headers.
+Use `getConsumer` to read and validate the consumer headers injected by the Gatelin gateway into each request.
 It stores the validated consumer information in **res.locals.consumer** (`{ id, nickname }`) for use by subsequent middleware in the request pipeline.
-It must be called whenever the route is protected and requires consumer information.
+Add it to any route that needs to identify the caller.
 
 ## API Reference
 
