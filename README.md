@@ -26,7 +26,7 @@ $ npm i @dwtechs/gatelin-express
 import express from "express";
 const router = express.Router();
 
-import getConsumer from "@dwtechs/gatelin-express";
+import { getConsumer } from "@dwtechs/gatelin-express";
 
 // Routes
 // Get items and returns Json

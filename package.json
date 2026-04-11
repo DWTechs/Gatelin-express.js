@@ -3,9 +3,15 @@
   "version": "0.2.0",
   "description": "Open source Gatelin gateway toolset for Express.js.",
   "keywords": [
-    "Gateway"
+    "gateway",
+    "express",
+    "middleware",
+    "consumer"
   ],
   "homepage": "https://github.com/DWTechs/Gatelin-express.js",
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "exports": "./dist/gatelin-express.js",
   "types": "dist/gatelin-express",
@@ -25,7 +31,6 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "",
     "prebuild": "npm install",
     "build": "node ./scripts/clear && tsc && npm run rollup && node ./scripts/copy && npm run test",
     "rollup:mjs": "rollup --config rollup.config.mjs",
