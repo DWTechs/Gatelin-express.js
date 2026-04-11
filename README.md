@@ -5,16 +5,6 @@
 ![Jest:coverage](https://img.shields.io/badge/Jest:coverage-100%25-brightgreen.svg)
 
 
-- [Synopsis](#synopsis)
-- [Support](#support)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Reference](#api-reference)
-- [Logs](#logs)
-- [Contributors](#contributors)
-- [Stack](#stack)
-
-
 ## Synopsis
 
 **[Gatelin-express.js](https://github.com/DWTechs/Gatelin-express.js)** is an open source Gatelin gateway toolset for Express.js.  
