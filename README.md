@@ -5,7 +5,7 @@
 ![Jest:coverage](https://img.shields.io/badge/Jest:coverage-100%25-brightgreen.svg)
 
 
-**[Gatelin-express.js](https://github.com/DWTechs/Gatelin-express.js)** is an open source Express.js middleware to extract and validate Gatelin gateway consumer headers.  
+Open source Express.js middleware to extract and validate Gatelin gateway consumer headers.  
 
 - 🪶 Very lightweight
 - 🧪 Thoroughly tested
