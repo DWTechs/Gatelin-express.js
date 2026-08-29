@@ -36,7 +36,7 @@ router.post("/", getConsumer, ...);
 ```
 
 Use `getConsumer` to read and validate the consumer headers injected by the Gatelin gateway into each request.
-It stores the validated consumer information in **res.locals.consumer** (`{ id, nickname }`) for use by subsequent middleware in the request pipeline.
+It stores the validated consumer information in **res.locals.consumer** (`{ userId, nickname }`) for use by subsequent middleware in the request pipeline.
 Add it to any route that needs to identify the caller.
 
 ## API Reference
@@ -45,15 +45,15 @@ Add it to any route that needs to identify the caller.
 
 /**
  * Middleware to extract and validate consumer information from request headers.
- * Retrieves consumer ID from 'x-consumer-id' header and consumer nickname from 
- * 'x-consumer-nickname' header.
+ * Retrieves consumer ID from 'x-consumer-user-id' header and consumer nickname from 
+ * 'x-consumer-name' header.
  * Validates that the ID is a valid integer between 1 and 999999999, and the nickname
- * has at least 5 characters.
- * Stores the validated consumer information in res.locals.consumer ({ id, nickname })
+ * is a string of 3 to 30 characters.
+ * Stores the validated consumer information in res.locals.consumer ({ userId, nickname })
  * for use by subsequent middleware in the request pipeline.
  *
  * @param {Request} req - The Express request object containing consumer headers 
- *                  (x-consumer-id and x-consumer-nickname).
+ *                  (x-consumer-user-id and x-consumer-name).
  * @param {Response} res - The Express response object where consumer data will be stored 
  *                   in res.locals.consumer.
  * @param {NextFunction} next - The next middleware function in the Express.js 
@@ -75,7 +75,7 @@ import type { Consumer } from "@dwtechs/gatelin-express";
 
 // Type res.locals.consumer in downstream middleware
 const consumer = res.locals.consumer as Consumer;
-// consumer.id       → number
+// consumer.userId   → number
 // consumer.nickname → string
 
 ```

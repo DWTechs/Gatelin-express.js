@@ -1,6 +1,6 @@
 {
   "name": "@dwtechs/gatelin-express",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Express.js middleware to extract and validate Gatelin gateway consumer headers",
   "keywords": [
     "gateway",
@@ -13,8 +13,15 @@
     "node": ">=22"
   },
   "type": "module",
-  "exports": "./dist/gatelin-express.js",
-  "types": "dist/gatelin-express",
+  "sideEffects": false,
+  "main": "dist/gatelin-express.js",
+  "types": "dist/gatelin-express.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/gatelin-express.js",
+      "types": "./dist/gatelin-express.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/DWTechs/Gatelin-express.js"
@@ -40,9 +47,12 @@
   "files": [
     "dist/"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "@dwtechs/checkard": "3.6.0",
-    "@dwtechs/winstan": "0.7.0"
+    "@dwtechs/checkard": "3.6.1",
+    "@dwtechs/winstan": "0.7.1"
   },
   "devDependencies": {
     "@babel/preset-env": "7.29.2",
