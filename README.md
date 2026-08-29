@@ -5,7 +5,7 @@
 ![Jest:coverage](https://img.shields.io/badge/Jest:coverage-100%25-brightgreen.svg)
 
 
-Open source Express.js middleware to extract and validate Gatelin gateway consumer headers.  
+Open source Express.js middleware to extract and validate Gatelin consumer and ACL headers.  
 
 - 🪶 Very lightweight
 - 🧪 100% code coverage
@@ -27,17 +27,26 @@ $ npm i @dwtechs/gatelin-express
 import express from "express";
 const router = express.Router();
 
-import { getConsumer } from "@dwtechs/gatelin-express";
+import { getConsumer, getAcl, stripUnallowedFields } from "@dwtechs/gatelin-express";
 
 // Routes
 // Add new items
-router.post("/", getConsumer, ...);
+router.post("/", getConsumer, getAcl, stripUnallowedFields, createItems);
 
 ```
 
-Use `getConsumer` to read and validate the consumer headers injected by the Gatelin gateway into each request.
+Use `getConsumer` to read and validate the consumer headers injected by Gatelin into each request.
 It stores the validated consumer information in **res.locals.consumer** (`{ userId, nickname }`) for use by subsequent middleware in the request pipeline.
 Add it to any route that needs to identify the caller.
+
+Use `getAcl` to read and validate the ACL headers injected by Gatelin into each request.
+It stores the parsed ACL in **res.locals.acl** (`{ fields, conditions }`) for use by subsequent middleware in the request pipeline.
+`getAcl` only validates the header shape (structure, size, allowed operators): it does not know your service's entity model, so each service must still check the returned field names and conditions against its own data before applying them.
+Add it to any route that needs to enforce field- or row-level permissions forwarded by Gatelin.
+
+Use `stripUnallowedFields` after `getAcl` to project `req.body.rows` onto the caller's field allow-list (`res.locals.acl.fields`), keeping only `id` and allowed keys on each row.
+It is a no-op (rows passed through unchanged) when `res.locals.acl.fields` is `null` (unrestricted) or `req.body.rows` is not an array.
+Add it to write routes (create/update) that need to silently drop fields the caller isn't allowed to set, rather than trusting your own entity validation alone.
 
 ## API Reference
 
@@ -65,18 +74,67 @@ Add it to any route that needs to identify the caller.
  */
 function getConsumer(req: Request, res: Response, next: NextFunction): void {}
 
+/**
+ * Middleware to extract and validate ACL headers injected by Gatelin.
+ * Retrieves the field allow-list from the 'x-acl-fields' header (comma-separated) and
+ * the query conditions from the 'x-acl-conditions' header (JSON array of
+ * { field, op, value }).
+ * Only validates the header shape (structure, size, allowed operators): field names
+ * are meaningless without a service's own entity metadata, so each service is
+ * responsible for checking returned fields/conditions against its own data model.
+ * Stores the parsed result in res.locals.acl ({ fields, conditions }) for use by
+ * subsequent middleware in the request pipeline.
+ *
+ * @param {Request} req - The Express request object containing ACL headers
+ *                  (x-acl-fields and x-acl-conditions).
+ * @param {Response} res - The Express response object where the parsed ACL will be
+ *                   stored in res.locals.acl.
+ * @param {NextFunction} next - The next middleware function in the Express.js
+ *                       request-response cycle.
+ *
+ * @returns {void} Calls the next middleware function with an error if a header is
+ *                 malformed, otherwise proceeds to the next middleware function.
+ *
+ */
+function getAcl(req: Request, res: Response, next: NextFunction): void {}
+
+/**
+ * Middleware that strips fields not on the allow-list parsed by getAcl
+ * (res.locals.acl.fields) from req.body.rows, keeping only "id" and allowed keys on
+ * each row. This is the Gatelin-contract part of field-level ACL enforcement: it only
+ * knows about the { rows: [...] } write-payload shape, not any particular entity/ORM,
+ * so services still validate field names against their own data model before calling
+ * this.
+ * Requires getAcl to have run first so res.locals.acl.fields is populated; treated as
+ * unrestricted (rows passed through unchanged) when absent.
+ *
+ * @param {Request} req - The Express request object. req.body.rows is filtered in
+ *                  place when it is an array; left untouched otherwise.
+ * @param {Response} res - The Express response object holding res.locals.acl.fields.
+ * @param {NextFunction} next - The next middleware function in the Express.js
+ *                       request-response cycle.
+ *
+ * @returns {void} Always proceeds to the next middleware function.
+ */
+function stripUnallowedFields(req: Request, res: Response, next: NextFunction): void {}
+
 ```
 
-The `Consumer` interface is exported and can be used to type `res.locals.consumer` in downstream middleware or route handlers:
+The `Consumer`, `Acl` and `AclCondition` interfaces are exported and can be used to type `res.locals.consumer` / `res.locals.acl` in downstream middleware or route handlers:
 
 ```typescript
 
-import type { Consumer } from "@dwtechs/gatelin-express";
+import type { Consumer, Acl } from "@dwtechs/gatelin-express";
 
 // Type res.locals.consumer in downstream middleware
 const consumer = res.locals.consumer as Consumer;
 // consumer.userId   → number
 // consumer.nickname → string
+
+// Type res.locals.acl in downstream middleware
+const acl = res.locals.acl as Acl;
+// acl.fields     → Set<string> | null (null = unrestricted, empty Set = id only)
+// acl.conditions → { field, op, value }[]
 
 ```
 
