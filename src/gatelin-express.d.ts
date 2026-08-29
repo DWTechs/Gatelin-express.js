@@ -24,6 +24,9 @@ export {
   getConsumer,
   getAcl,
   stripUnallowedFields,
+};
+
+export type {
   Consumer,
   Acl,
   AclCondition,
