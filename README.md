@@ -8,10 +8,8 @@
 Open source Express.js middleware to extract and validate Gatelin consumer and ACL headers.  
 
 - 🪶 Very lightweight
-- 🧪 100% code coverage
 - 🚚 Shipped as ESM
 - 📝 Written in TypeScript
-- 🔒 Strict input validation
 
 ## Installation
 
@@ -38,11 +36,14 @@ router.post("/", getConsumer, getAcl, stripUnallowedFields, createItems);
 Use `getConsumer` to read and validate the consumer headers injected by Gatelin into each request.
 It stores the validated consumer information in **res.locals.consumer** (`{ userId, nickname }`) for use by subsequent middleware in the request pipeline.
 Add it to any route that needs to identify the caller.
+It calls `next({ statusCode: 400, message })` when the user ID is missing/invalid or the nickname is missing/invalid.
 
 Use `getAcl` to read and validate the ACL headers injected by Gatelin into each request.
 It stores the parsed ACL in **res.locals.acl** (`{ fields, conditions }`) for use by subsequent middleware in the request pipeline.
 `getAcl` only validates the header shape (structure, size, allowed operators): it does not know your service's entity model, so each service must still check the returned field names and conditions against its own data before applying them.
 Add it to any route that needs to enforce field- or row-level permissions forwarded by Gatelin.
+Header limits: `x-acl-conditions` is at most 16 KB and holds at most 50 conditions. Allowed operators are `=`, `!=`, `<`, `>`, `<=`, `>=`, and each `value` must be a string, number or boolean.
+It calls `next({ statusCode: 403, message })` on duplicate headers, invalid JSON, or an invalid/unsupported condition.
 
 Use `stripUnallowedFields` after `getAcl` to project `req.body.rows` onto the caller's field allow-list (`res.locals.acl.fields`), keeping only `id` and allowed keys on each row.
 It is a no-op (rows passed through unchanged) when `res.locals.acl.fields` is `null` (unrestricted) or `req.body.rows` is not an array.
@@ -144,9 +145,9 @@ const acl = res.locals.acl as Acl;
 | :---------- | :-----: |
 | Node.js     |  >= 22  |
 
-## Logs
+## Dependencies
 
-**Gatelin-express.js** uses **[@dwtechs/Winstan](https://www.npmjs.com/package/@dwtechs/winstan)** library for logging.
+Gatelin-express.js uses **[@dwtechs/Winstan](https://www.npmjs.com/package/@dwtechs/winstan)** library for logging and **[@dwtechs/Checkard](https://www.npmjs.com/package/@dwtechs/checkard)** for input validation.
 All logs are in debug mode. Meaning they should not appear in production mode.
 
 ## Stack
