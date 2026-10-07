@@ -19,30 +19,25 @@
   "types": "dist/gatelin-express.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/gatelin-express.js",
-      "types": "./dist/gatelin-express.d.ts"
+      "types": "./dist/gatelin-express.d.ts",
+      "import": "./dist/gatelin-express.js"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DWTechs/Gatelin-express.js"
+    "url": "git+https://github.com/DWTechs/Gatelin-express.js.git"
   },
   "bugs": {
-    "url": "https://github.com/DWTechs/Gatelin-express.js/issues",
-    "email": ""
+    "url": "https://github.com/DWTechs/Gatelin-express.js/issues"
   },
   "license": "MIT",
   "author": {
-    "name": "Ludovic Cluber",
-    "email": "http://www.lcluber.com/contact",
-    "url": "http://www.lcluber.com"
+    "name": "Ludovic Cluber"
   },
-  "contributors": [],
   "scripts": {
     "prebuild": "npm install",
     "build": "node ./scripts/clear && tsc && npm run rollup && node ./scripts/copy && npm run test",
-    "rollup:mjs": "rollup --config rollup.config.mjs",
-    "rollup": "npm run rollup:mjs",
+    "rollup": "rollup --config rollup.config.mjs",
     "test": "jest --coverage"
   },
   "files": [
@@ -63,6 +58,6 @@
     "core-js": "3.49.0",
     "jest": "30.3.0",
     "rollup": "4.60.1",
-    "typescript": "6.0.2"
+    "typescript": "6.0.3"
   }
 }
