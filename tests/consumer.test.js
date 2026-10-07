@@ -95,7 +95,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
       expect(res.locals.consumer).toBeUndefined();
     });
 
@@ -106,7 +106,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
     });
 
     it("should call next() with a 400 error when x-consumer-user-id is negative", () => {
@@ -116,7 +116,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
     });
 
     it("should call next() with a 400 error when x-consumer-user-id exceeds upper boundary", () => {
@@ -126,7 +126,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
     });
 
     it("should call next() with a 400 error when x-consumer-user-id is not a number", () => {
@@ -136,7 +136,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
     });
 
     it("should call next() with a 400 error when x-consumer-user-id is a float", () => {
@@ -146,7 +146,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
     });
 
     it("should call next() with a 400 error when x-consumer-user-id is an empty string", () => {
@@ -156,7 +156,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
     });
 
   });
@@ -170,7 +170,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer nickname" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer nickname" });
       expect(res.locals.consumer).toBeUndefined();
     });
 
@@ -181,7 +181,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer nickname" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer nickname" });
     });
 
     it("should call next() with a 400 error when nickname is shorter than 3 characters", () => {
@@ -191,7 +191,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Invalid consumer nickname" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Invalid consumer nickname" });
     });
 
     it("should call next() with a 400 error when nickname is exactly 2 characters", () => {
@@ -201,7 +201,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Invalid consumer nickname" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Invalid consumer nickname" });
     });
 
     it("should call next() with a 400 error when nickname exceeds 30 characters", () => {
@@ -211,7 +211,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Invalid consumer nickname" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Invalid consumer nickname" });
     });
 
   });
@@ -225,7 +225,7 @@ describe("getConsumer", () => {
 
       getConsumer(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 400, msg: "Missing consumer Id" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 400, message: "Missing consumer Id" });
       expect(next).toHaveBeenCalledTimes(1);
     });
 

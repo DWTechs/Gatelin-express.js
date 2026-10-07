@@ -62,7 +62,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Duplicate x-acl-fields headers" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Duplicate x-acl-fields headers" });
       expect(res.locals.acl).toBeUndefined();
     });
 
@@ -89,7 +89,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Duplicate x-acl-conditions headers" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Duplicate x-acl-conditions headers" });
     });
 
     it("should call next() with a 403 error when x-acl-conditions is invalid JSON", () => {
@@ -99,7 +99,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Invalid x-acl-conditions JSON" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Invalid x-acl-conditions JSON" });
     });
 
     it("should call next() with a 403 error when x-acl-conditions is not an array", () => {
@@ -109,7 +109,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Invalid ACL conditions" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Invalid ACL conditions" });
     });
 
     it("should call next() with a 403 error when x-acl-conditions exceeds the max number of conditions", () => {
@@ -120,7 +120,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Invalid ACL conditions" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Invalid ACL conditions" });
     });
 
     it("should call next() with a 403 error when x-acl-conditions header is too large", () => {
@@ -130,7 +130,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "x-acl-conditions header is too large" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "x-acl-conditions header is too large" });
     });
 
     it("should call next() with a 403 error when a condition is not an object", () => {
@@ -140,7 +140,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Invalid ACL condition" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Invalid ACL condition" });
     });
 
     it("should call next() with a 403 error when a condition uses an unsupported operator", () => {
@@ -150,7 +150,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Unsupported ACL condition" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Unsupported ACL condition" });
     });
 
     it("should call next() with a 403 error when a condition value is an object", () => {
@@ -160,7 +160,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Unsupported ACL condition" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Unsupported ACL condition" });
     });
 
     it("should call next() with a 403 error when a condition field is missing", () => {
@@ -170,7 +170,7 @@ describe("getAcl", () => {
 
       getAcl(req, res, next);
 
-      expect(next).toHaveBeenCalledWith({ status: 403, msg: "Unsupported ACL condition" });
+      expect(next).toHaveBeenCalledWith({ statusCode: 403, message: "Unsupported ACL condition" });
     });
 
   });

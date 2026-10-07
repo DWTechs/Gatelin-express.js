@@ -1,4 +1,8 @@
 
+# 0.4.0 (Oct 7th 2026)
+
+- **Fixes error objects passed to `next()`**: they used `{ status, msg }`, but the Express error handler (`@dwtechs/errandler-express`) sends `err.message`, so these 400/403 responses went out with an empty body. They are now `{ statusCode, message }`, the shape used across the other `@dwtechs` libraries. Code reading `err.status` / `err.msg` from these errors must read `err.statusCode` / `err.message`.
+
 # 0.3.0 (Aug 28th 2026)
 
 - Align consumer headers with Gatelin's new contract:

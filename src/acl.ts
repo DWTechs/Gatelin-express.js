@@ -45,16 +45,16 @@ function getAcl(req: Request, res: Response, next: NextFunction): void {
   log.debug(() => `getAcl fields=${fieldsHeader} conditions=${conditionsHeader}`);
 
   if (Array.isArray(fieldsHeader))
-    return void next({ status: 403, msg: "Duplicate x-acl-fields headers" });
+    return void next({ statusCode: 403, message: "Duplicate x-acl-fields headers" });
   const fields = parseFields(fieldsHeader);
 
   if (Array.isArray(conditionsHeader))
-    return void next({ status: 403, msg: "Duplicate x-acl-conditions headers" });
+    return void next({ statusCode: 403, message: "Duplicate x-acl-conditions headers" });
   let conditions: AclCondition[];
   try {
     conditions = parseConditions(conditionsHeader);
   } catch (err) {
-    return void next({ status: 403, msg: (err as Error).message });
+    return void next({ statusCode: 403, message: (err as Error).message });
   }
 
   const acl: Acl = { fields, conditions };
